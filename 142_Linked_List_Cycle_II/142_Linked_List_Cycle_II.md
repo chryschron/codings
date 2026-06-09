@@ -52,7 +52,7 @@ struct ListNode *detectCycle(struct ListNode *head) {
         tortoise = tortoise->next;
         hare = hare->next->next;
         if (tortoise == hare)
-            return locateLoopBeginning(head, tortoise);
+            return locateCycleBeginning(head, tortoise);
     }
     return NULL;
 }
