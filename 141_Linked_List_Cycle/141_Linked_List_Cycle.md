@@ -113,5 +113,6 @@ bool hasCycle(struct ListNode *head) {
 ```
 
 ## memo
-- LeetCode上ではheapエラーが発生(おそらくListNodeを解放するときに`head`のDouble Freeが発生するため)
+- LeetCode上ではheapエラーが発生(おそらくListNodeを解放するときに~~`head`~~のDouble Freeが発生するため)
     - 手元で一切メモリ解放しないテスト関数を書いたところ、動いてしまった
+    - 追記(06/09) `return true`前に`head->next = NULL`としてもheapエラーが発生したので、おそらく全ノードについて`node->next`を参照している
