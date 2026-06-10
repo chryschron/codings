@@ -19,7 +19,7 @@ struct ListNode* deleteDuplicates(struct ListNode* head) {
 
 ## memo
 - 計算量: O(N)
-	- frontierが要素Nすべてを探索する
+	- `pioneer`が要素Nすべてを探索する
 	- ワーストは重複が無い場合、同じ値をひたすら代入し直す羽目になるから
 - メモリ: O(1)
 
