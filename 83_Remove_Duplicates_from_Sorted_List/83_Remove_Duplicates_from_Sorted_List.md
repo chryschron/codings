@@ -32,7 +32,7 @@ struct ListNode* deleteDuplicates(struct ListNode* head) {
 
     base = pioneer = head;
     while (base) {
-        pioneer = pioneer->next;
+        pioneer = base->next;
         while (pioneer && base->val == pioneer->val) {
             struct ListNode *dup = pioneer;
             pioneer = pioneer->next;
