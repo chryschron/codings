@@ -87,3 +87,34 @@ public:
 - `std::string`
 	- https://en.cppreference.com/cpp/string/basic_string
 - (余談)マルチバイト文字の場合は`wstring`と`wchar_t`を使うと良さそう?
+
+# 3回目
+`std::flat_map`を使ってみる(LeetCodeでは動かなかったので手元で動作確認した)
+
+```c++
+class Solution {
+public:
+    bool isValid(std::string s) {
+        static const boost::container::flat_map<char, char> brackets = {
+            {')', '('},
+            {'}', '{'},
+            {']', '['},
+        };
+        const char stack_bottom = '$';
+        std::stack<char> open_brackets;
+        open_brackets.push(stack_bottom);
+
+        for (const char c : s) {
+            if (auto bracket = brackets.find(c); bracket != brackets.end()) {
+                if (bracket->second != open_brackets.top())
+                    return false;
+                open_brackets.pop();
+                continue;
+            } else {
+                open_brackets.push(c);
+            }
+        }
+        return open_brackets.top() == stack_bottom;
+    }
+};
+```
