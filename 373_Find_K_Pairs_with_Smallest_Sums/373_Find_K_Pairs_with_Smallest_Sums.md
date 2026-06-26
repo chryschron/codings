@@ -63,3 +63,38 @@ public:
 - 故にまずnums2[0]に固定すれば各行の配列の最小値がわかる、そこから更に全体の最小値を取って、該当行を右に一個ずらすことを繰り返す
 	- 最小の値だけを取り続けられる
 - 時間計算量はa=min(nums1.size(), k)としてO(k log a)、メモリはO(a)
+
+# 3回目
+構造体を使う
+
+```c++
+class Solution {
+public:
+    struct PairState {
+        int sum;
+        int i;
+        int j;
+
+        bool operator>(const PairState& other) const {
+            return sum > other.sum;
+        }
+    };
+    vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
+        priority_queue<PairState, vector<PairState>, greater<PairState>> pq;
+
+        for (int i = 0; i < min((size_t)k, nums1.size()); i++)
+            pq.emplace(nums1[i] + nums2[0], i, 0);
+        
+        vector<vector<int>> result;
+        while (!pq.empty() && k--) {
+            PairState pq_min = pq.top();
+            pq.pop();
+            result.push_back({nums1[pq_min.i], nums2[pq_min.j]});
+
+            if (pq_min.j + 1 < nums2.size())
+                pq.emplace(nums1[pq_min.i] + nums2[pq_min.j + 1], pq_min.i, pq_min.j + 1);
+        }
+        return result;
+    }
+};
+```
