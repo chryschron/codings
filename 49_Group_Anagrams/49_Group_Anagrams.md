@@ -26,7 +26,7 @@ public:
                 anagram_groups.push_back({str, str_anagram_map});
             } else {
                 for (int i = 0; i < result.size(); i++) {
-                    if (result[i][0] == group_str) {
+                    if (result[i][0] == group_str.value()) {
                         result[i].push_back(str);
                         break;
                     }
